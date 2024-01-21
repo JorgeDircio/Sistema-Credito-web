@@ -34,7 +34,8 @@ const formStyles = {
 
     }
     if (values.email === 'test@test.com' && values.password === '123') {
-      Meteor.call('user.prueba', {name: 'jorge', age: 28},(error, result) => {
+      setStatus('');
+      Meteor.call('user.login', {name: 'jorge', age: 28},(error, result) => {
         if (error) {
           console.error('Error al llamar al método:', error);
         } else {

@@ -25,7 +25,7 @@ new ValidatedMethod({
     UserService.validateUserName(user.username, user._id);
   },
   run(user) {
-    const response = new ResponseMessage()
+    const response = new ResponseMessage();
 
     //Actualizado de usuario
     if (user._id) {
@@ -46,7 +46,6 @@ new ValidatedMethod({
       }
     } else {
       try {
-
         //Llamar al metodo para actualizar
         UserService.createUser(user);
 
@@ -98,7 +97,7 @@ new ValidatedMethod({
 });
 
 new ValidatedMethod({
-  name: 'user.prueba',
+  name: 'user.login',
   validate() {
   },
   run(user) {

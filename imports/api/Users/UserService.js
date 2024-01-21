@@ -1,3 +1,5 @@
+import { ResponseMessage } from "../../startup/server/utilities/ResponseMessage";
+
 export default {
 
   validateEmail(newEmail, userId) {
@@ -15,16 +17,17 @@ export default {
   },
 
   validateUserName(newUsername, userId) {
-    //Buscar email
+    const response = new ResponseMessage();
+    //Buscar usuario
     const usernameExists = Accounts.findUserByUsername(newUsername);
     //Validar si viene el userId quiere decir que va actualizar el usuario y si no viene, va a crear un usuario
     if (userId) {
       const oldUser = Meteor.users.findOne(userId);
       if (oldUser.username !== newUsername && usernameExists) {
-        throw new Meteor.Error(403, 'El nuevo username ya se encuentra en uso');
+        throw new Meteor.Error(403, 'El nuevo username ya se encuentra en uso', { accept: false });
       }
     } else if (usernameExists) {
-      throw new Meteor.Error(403, 'El nuevo username ya se encuentra en uso');
+      throw new Meteor.Error(403, 'El nuevo username ya se encuentra en uso', { accept: false});
     }
   },
 
@@ -63,5 +66,9 @@ export default {
 
   deleteUser({ userId }) {
     Meteor.users.remove(userId);
-  }
+  },
+
+  login({ username, password }) {
+
+  },
 }
